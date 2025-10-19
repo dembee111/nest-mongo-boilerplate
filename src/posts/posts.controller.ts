@@ -42,7 +42,7 @@ export class PostsController {
       'You get a success 201 response if the post is created successfully',
   })
 
-  // create post
+  // create post any test
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
     return this.postsService.createPost(createPostDto);
