@@ -1,0 +1,30 @@
+POST http://localhost:8005/users
+Content-Type: application/json
+
+{
+  "firstName": "Gegeelen",
+  "lastName": "Batka",
+  "email": "gegeelen@gegeensoft.com",
+  "password": "Password123#"
+}
+
+
+POST http://localhost:8005/users/create-many
+Content-Type: application/json
+
+{
+  "users": [
+  {
+  "firstName": "Gegeelen",
+  "lastName": "Bataa",
+  "email": "boldoo@gegeensoft.com",
+  "password": "Password123#"
+  },
+  {
+  "firstName": "Odnoo",
+  "lastName": "Undral",
+  "email": "soogii@gegeensoft.com",
+  "password": "Password123#"
+  }
+]
+}

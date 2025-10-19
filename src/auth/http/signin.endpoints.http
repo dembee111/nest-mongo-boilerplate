@@ -1,0 +1,7 @@
+POST http://localhost:8005/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "gegeelen@gegeensoft.com",
+  "password": "Password123#"
+}

@@ -1,0 +1,15 @@
+# {\r\n    \"@context\": \"https:\/\/schema.org\",\r\n    \"@type\": \"Person\"\r\n  }
+POST http://localhost:8005/posts
+Content-Type: application/json
+
+{
+  "title": "Astro js",
+  "postType": "post",
+  "slug": "new-with-nest-js-1",
+  "status": "draft",
+  "content": "post-content",
+  "featuredImageUrl": "http://localhost.com/images/image1.jpg",
+  "publishOn": "2024-03-16T07:46:32.000+00:00",
+  "author": "68ec95b69e0694367120a1ef",
+  "tags": ["68eca92a1627ac2ef8cc6664"]
+}
