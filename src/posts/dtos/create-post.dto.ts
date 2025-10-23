@@ -73,11 +73,6 @@ export class CreatePostDto {
   publishOn?: Date;
 
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  author: string;
-
-  @ApiProperty()
   @IsArray()
   @IsOptional()
   @IsString({ each: true })

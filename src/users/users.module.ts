@@ -8,10 +8,22 @@ import { UsersService } from './providers/users.service';
 import { UsersCreateManyProvider } from './providers/users-create-many.provider';
 import { CreateUserProvider } from './providers/create-user.provider';
 import profileConfig from './config/profile.config';
+import { FindOneByGoogleIdProvider } from './providers/find-one-by-google-id.provider';
+import { CreateGoogleUserProvider } from './providers/create-google-user.provider';
+import { FindOneByFacebookIdProvider } from './providers/find-one-by-facebook-id.provider';
+import { CreateFacebookUserProvider } from './providers/create-facebook-user.provider';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersCreateManyProvider, CreateUserProvider],
+  providers: [
+    UsersService,
+    UsersCreateManyProvider,
+    CreateUserProvider,
+    FindOneByGoogleIdProvider,
+    CreateGoogleUserProvider,
+    FindOneByFacebookIdProvider,
+    CreateFacebookUserProvider,
+  ],
   exports: [UsersService],
   imports: [
     MongooseModule.forFeature([

@@ -9,10 +9,19 @@ import { GenerateTokensProvider } from './providers/generate-tokens.provider';
 import { RefreshTokensProvider } from './providers/refresh-tokens.provider';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { GoogleAuthenticationController } from './social/google-authentication.controller';
+import { GoogleAuthenticationService } from './social/providers/google-authentication.service';
+import { FacebookAuthenticationService } from './social/providers/facebook-authentication.service';
+
 import jwtConfig from './config/jwt.config';
+import { FacebookAuthenticationController } from './social/facebook-authentication.controller';
 
 @Module({
-  controllers: [AuthController],
+  controllers: [
+    AuthController,
+    GoogleAuthenticationController,
+    FacebookAuthenticationController,
+  ],
   providers: [
     AuthService,
     {
@@ -22,6 +31,8 @@ import jwtConfig from './config/jwt.config';
     SignInProvider,
     GenerateTokensProvider,
     RefreshTokensProvider,
+    GoogleAuthenticationService,
+    FacebookAuthenticationService,
   ],
   imports: [
     forwardRef(() => UsersModule),

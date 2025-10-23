@@ -14,6 +14,8 @@ import { PatchPostDto } from './dtos/patch-post.dto';
 import { GetPostsDto } from './dtos/get-post.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { AuthType } from 'src/auth/enums/auth-type.enum';
+import { ActiveUserData } from 'src/auth/interfaces/active-user-data.interface';
+import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 
 @Controller('posts')
 @ApiTags('Posts')
@@ -44,8 +46,11 @@ export class PostsController {
 
   // create post any test
   @Post()
-  public createPost(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.createPost(createPostDto);
+  public createPost(
+    @Body() createPostDto: CreatePostDto,
+    @ActiveUser() user: ActiveUserData,
+  ) {
+    return this.postsService.create(createPostDto, user);
   }
 
   @ApiOperation({

@@ -29,6 +29,20 @@ export class User extends Document {
     isRequired: true,
   })
   password: string;
+
+  @Prop({
+    type: String,
+    required: false,
+    sparse: true,
+  })
+  googleId?: string;
+
+  @Prop({
+    type: String,
+    required: false,
+    sparse: true,
+  })
+  facebookId?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

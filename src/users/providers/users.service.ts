@@ -14,6 +14,12 @@ import profileConfig from '../config/profile.config';
 import { UsersCreateManyProvider } from './users-create-many.provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 import { CreateUserProvider } from './create-user.provider';
+import { FindOneByGoogleIdProvider } from './find-one-by-google-id.provider';
+import { CreateGoogleUserProvider } from './create-google-user.provider';
+import { GoogleUser } from '../interfaces/google-user.interface';
+import { FindOneByFacebookIdProvider } from './find-one-by-facebook-id.provider';
+import { CreateFacebookUserProvider } from './create-facebook-user.provider';
+import { FacebookUser } from '../interfaces/facebook-user.interface';
 /**
  * Class to connect to Users table and perform business operations
  */
@@ -36,6 +42,25 @@ export class UsersService {
      * Inject Create Users Provider
      */
     private readonly createUserProvider: CreateUserProvider,
+    /**
+     * Inject findOneByGoogleIdProvider
+     */
+    private readonly findOneByGoogleIdProvider: FindOneByGoogleIdProvider,
+
+    /**
+     * Inject findOneByFacebookIdProvider
+     */
+    private readonly findOneByFacebookIdProvider: FindOneByFacebookIdProvider,
+
+    /**
+     * Inject createGooogleUserProvider
+     */
+    private readonly createFacebookUserProvider: CreateFacebookUserProvider,
+
+    /**
+     * Inject createGooogleUserProvider
+     */
+    private readonly createGooogleUserProvider: CreateGoogleUserProvider,
   ) {}
 
   /**
@@ -116,5 +141,25 @@ export class UsersService {
 
   public async createMany(createManyUsersDto: CreateManyUsersDto) {
     return await this.usersCreateManyProvider.createMany(createManyUsersDto);
+  }
+
+  public async findOneByGoogleId(googleId: string) {
+    return await this.findOneByGoogleIdProvider.findOneByGoogleId(googleId);
+  }
+
+  public async createGoogleUser(googleUser: GoogleUser) {
+    return await this.createGooogleUserProvider.createGoogleUser(googleUser);
+  }
+
+  public async findOneByFacebookId(facebooId: string) {
+    return await this.findOneByFacebookIdProvider.findOneByFacebookId(
+      facebooId,
+    );
+  }
+
+  public async createFacebookUser(facebookUser: FacebookUser) {
+    return await this.createFacebookUserProvider.createFacebookUser(
+      facebookUser,
+    );
   }
 }
