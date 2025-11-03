@@ -2,9 +2,9 @@ POST http://localhost:8005/users
 Content-Type: application/json
 
 {
-  "firstName": "Gegeelen",
-  "lastName": "Batka",
-  "email": "gegeelen@gegeensoft.com",
+  "firstName": "Ijilee",
+  "lastName": "Tumee",
+  "email": "ijilee.9986@gmail.com",
   "password": "Password123#"
 }
 

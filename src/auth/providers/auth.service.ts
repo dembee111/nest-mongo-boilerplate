@@ -27,10 +27,6 @@ export class AuthService {
   }
 
   public async refreshTokens(refreshTokenDto: RefreshTokenDto) {
-    console.log(
-      '🚀 ~ AuthService ~ refreshTokens ~ refreshTokenDto:',
-      refreshTokenDto,
-    );
     return await this.refreshTokensProvider.refreshTokens(refreshTokenDto);
   }
 }

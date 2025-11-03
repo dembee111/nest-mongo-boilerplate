@@ -38,30 +38,35 @@ export class SignInProvider {
   ) {}
 
   public async signIn(signInDto: SignInDto) {
-    // find user by email ID
-    let user = await this.usersService.findOneByEmail(signInDto.email);
-    // Throw exception if user is not found
-    // Above | Taken care by the findInByEmail method
-
-    let isEqual: boolean = false;
-
     try {
-      // Compare the password to hash
-      isEqual = await this.hashingProvider.comparePassword(
-        signInDto.password,
-        user.password,
-      );
+      // find user by email ID
+      let user = await this.usersService.findOneByEmail(signInDto.email);
+
+      // Throw exception if user is not found
+      // Above | Taken care by the findInByEmail method
+
+      let isEqual: boolean = false;
+
+      try {
+        // Compare the password to hash
+        isEqual = await this.hashingProvider.comparePassword(
+          signInDto.password,
+          user.password,
+        );
+      } catch (error) {
+        throw new RequestTimeoutException(error, {
+          description: 'Could not compare the password',
+        });
+      }
+
+      if (!isEqual) {
+        throw new UnauthorizedException('Password does not match');
+      }
+
+      // Generate access token
+      return await this.generateTokensProvider.generateTokens(user);
     } catch (error) {
-      throw new RequestTimeoutException(error, {
-        description: 'Could not compare the password',
-      });
+      console.log(error);
     }
-
-    if (!isEqual) {
-      throw new UnauthorizedException('Password does not match');
-    }
-
-    // Generate access token
-    return await this.generateTokensProvider.generateTokens(user);
   }
 }

@@ -20,6 +20,10 @@ import { GoogleUser } from '../interfaces/google-user.interface';
 import { FindOneByFacebookIdProvider } from './find-one-by-facebook-id.provider';
 import { CreateFacebookUserProvider } from './create-facebook-user.provider';
 import { FacebookUser } from '../interfaces/facebook-user.interface';
+import { UpdatePhoneUserDto } from '../dtos/update-phone-user.dto';
+import { UpdateUserProvider } from './update-user.provider';
+import { UserSerializer } from '../serializer/user.serializer';
+import { ActiveUserData } from 'src/auth/interfaces/active-user-data.interface';
 /**
  * Class to connect to Users table and perform business operations
  */
@@ -61,6 +65,11 @@ export class UsersService {
      * Inject createGooogleUserProvider
      */
     private readonly createGooogleUserProvider: CreateGoogleUserProvider,
+
+    /**
+     * Inject Create Users Provider
+     */
+    private readonly updateUserProvider: UpdateUserProvider,
   ) {}
 
   /**
@@ -69,16 +78,30 @@ export class UsersService {
   public async createUser(createUserDto: CreateUserDto): Promise<User> {
     return await this.createUserProvider.createUser(createUserDto);
   }
+
+  /**
+   * Method to update a user phone and validation
+   */
+  public async updateUser(
+    updatePhoneUserDto: UpdatePhoneUserDto,
+    user: ActiveUserData,
+  ): Promise<User> {
+    return await this.updateUserProvider.updatePhoneUser(
+      updatePhoneUserDto,
+      user,
+    );
+  }
   /**
    * The method to get all the users from the database
    */
   public async findAll(limit: number, page: number) {
     try {
       const users = await this.userModel.find().limit(limit);
+
       if (!users) {
         throw new NotFoundException('Users not found');
       }
-      return users;
+      return UserSerializer.sanitizeMany(users);
     } catch (error) {
       // 3. Холболтын болон бусад алдаа барих
       throw new RequestTimeoutException(
@@ -122,7 +145,10 @@ export class UsersService {
         throw new BadRequestException('Invalid email format');
       }
 
-      const user = await this.userModel.findOne({ email }).exec();
+      const user = await this.userModel
+        .findOne({ email })
+        .select('+password')
+        .exec();
 
       if (!user) {
         throw new NotFoundException('User not found');

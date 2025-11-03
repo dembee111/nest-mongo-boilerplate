@@ -46,7 +46,6 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors();
-
   await app.listen(8005);
 }
 bootstrap();

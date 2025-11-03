@@ -32,7 +32,6 @@ export class CreatePostProvider {
   ) {}
 
   public async create(createPostDto: CreatePostDto, user: ActiveUserData) {
-    console.log('🚀 ~ CreatePostProvider ~ create ~ user:', user);
     let author = undefined;
     let tags = undefined;
 

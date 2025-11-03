@@ -12,6 +12,8 @@ import { FindOneByGoogleIdProvider } from './providers/find-one-by-google-id.pro
 import { CreateGoogleUserProvider } from './providers/create-google-user.provider';
 import { FindOneByFacebookIdProvider } from './providers/find-one-by-facebook-id.provider';
 import { CreateFacebookUserProvider } from './providers/create-facebook-user.provider';
+import { UpdateUserProvider } from './providers/update-user.provider';
+import { OtpModule } from 'src/otp/otp.module';
 
 @Module({
   controllers: [UsersController],
@@ -23,6 +25,7 @@ import { CreateFacebookUserProvider } from './providers/create-facebook-user.pro
     CreateGoogleUserProvider,
     FindOneByFacebookIdProvider,
     CreateFacebookUserProvider,
+    UpdateUserProvider,
   ],
   exports: [UsersService],
   imports: [
@@ -34,6 +37,7 @@ import { CreateFacebookUserProvider } from './providers/create-facebook-user.pro
     ]),
     ConfigModule.forFeature(profileConfig),
     forwardRef(() => AuthModule),
+    forwardRef(() => OtpModule),
   ],
 })
 export class UsersModule {}

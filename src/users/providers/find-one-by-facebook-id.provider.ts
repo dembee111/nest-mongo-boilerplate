@@ -14,6 +14,9 @@ export class FindOneByFacebookIdProvider {
   ) {}
 
   public async findOneByFacebookId(facebookId: string) {
-    return await this.userModel.findOne({ facebookId }).exec();
+    return await this.userModel
+      .findOne({ facebookId })
+      .select('+facebookId')
+      .exec();
   }
 }

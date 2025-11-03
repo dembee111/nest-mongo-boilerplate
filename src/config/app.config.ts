@@ -11,4 +11,10 @@ export default registerAs('appConfig', () => ({
   mailHost: process.env.MAIL_HOST,
   smtpUsername: process.env.SMTP_USERNAME,
   smtpPassword: process.env.SMTP_PASSWORD,
+  webSms: process.env.WEB_SMS,
+  skytelToken: process.env.SKYTEL_TOKEN,
+  redisHost: process.env.REDIS_HOST,
+  redisPort: process.env.REDIS_PORT,
+  redisPassword: process.env.REDIS_PASSWORD,
+  redisDb: process.env.REDIS_DB,
 }));

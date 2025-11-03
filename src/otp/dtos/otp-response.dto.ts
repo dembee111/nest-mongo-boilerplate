@@ -1,12 +1,12 @@
+import { IsOptional, IsString, Matches } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsInt, IsOptional } from 'class-validator';
 
 import { Type } from 'class-transformer';
 
-export class GetUsersParamDto {
+export class OtpResponseDto {
   @ApiPropertyOptional()
   @IsOptional()
-  @IsInt()
+  @IsString()
   @Type(() => String)
-  id?: string;
+  otpCode?: string;
 }

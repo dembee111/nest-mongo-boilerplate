@@ -14,6 +14,9 @@ export class FindOneByGoogleIdProvider {
   ) {}
 
   public async findOneByGoogleId(googleId: string) {
-    return await this.userModel.findOne({ googleId }).exec();
+    return await this.userModel
+      .findOne({ googleId })
+      .select('+googleId')
+      .exec();
   }
 }

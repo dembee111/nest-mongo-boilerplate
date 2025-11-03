@@ -10,13 +10,15 @@ import {
   DefaultValuePipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
 import { UsersService } from './providers/users.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 import { AuthType } from 'src/auth/enums/auth-type.enum';
 import { Auth } from 'src/auth/decorators/auth.decorator';
+import { UpdatePhoneUserDto } from './dtos/update-phone-user.dto';
+import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
+import { ActiveUserData } from 'src/auth/interfaces/active-user-data.interface';
 
 @Controller('users')
 @ApiTags('Users')
@@ -68,6 +70,14 @@ export class UsersController {
   @Post('create-many')
   public createManyUsers(@Body() createManyUsersDto: CreateManyUsersDto) {
     return this.usersService.createMany(createManyUsersDto);
+  }
+
+  @Patch('update-user-phone')
+  public patchPhoneUser(
+    @Body() updatePhoneUserDto: UpdatePhoneUserDto,
+    @ActiveUser() user: ActiveUserData,
+  ) {
+    return this.usersService.updateUser(updatePhoneUserDto, user);
   }
 
   @Patch()

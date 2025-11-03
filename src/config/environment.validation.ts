@@ -21,4 +21,10 @@ export default Joi.object({
   MAIL_HOST: Joi.string().required(),
   SMTP_USERNAME: Joi.string().required(),
   SMTP_PASSWORD: Joi.string().required(),
+  WEB_SMS: Joi.string().required(),
+  SKYTEL_TOKEN: Joi.string().required(),
+  REDIS_HOST: Joi.string().required(),
+  REDIS_PORT: Joi.string().required(),
+  REDIS_PASSWORD: Joi.string().required(),
+  REDIS_DB: Joi.string().required(),
 });

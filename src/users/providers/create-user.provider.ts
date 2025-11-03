@@ -10,6 +10,7 @@ import { User } from '../user.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
+import { UserSerializer } from '../serializer/user.serializer';
 
 @Injectable()
 export class CreateUserProvider {
@@ -47,7 +48,8 @@ export class CreateUserProvider {
           createUserDto.password,
         ),
       });
-      return await newUser.save();
+      const saved = await newUser.save();
+      return UserSerializer.sanitize(saved);
     } catch (error) {
       // 3. Холболтын болон бусад алдаа барих
       throw new RequestTimeoutException(
